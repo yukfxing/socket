@@ -2,7 +2,7 @@
 
 import socket
 import time
-from utils import recvMsg, packMsg
+from utils import recvMessage, sendMessage
 
 
 def init():
@@ -22,11 +22,10 @@ def main():
 
             print('send: ' + msg)
             content = {'msg': msg}
-            msg = packMsg(header, content)
-            client.send(msg)
+            sendMessage(client, header, content)
 
-            header, recvData = recvMsg(client)
-            print('recv: ' + recvData['msg'])
+            header, body = recvMessage(client)
+            print('recv: ' + body['msg'])
 
             time.sleep(10)
 

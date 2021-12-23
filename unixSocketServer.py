@@ -52,9 +52,7 @@ def dealMsg(con):
 
         res = dealDetailMsg(header, body)
 
-        header = {
-            'timestamp': int(time.time())
-        }
+        header = {}
         sendMessage(con, header, res)
         print (res['msg'] + '  ' + time.strftime("%Y-%m-%d %H:%M:%S"))
 
