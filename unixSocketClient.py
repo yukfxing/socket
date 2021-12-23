@@ -17,10 +17,7 @@ def init():
 def main():
     while True:
         try:
-            header = {
-                'timestamp': int(time.time()),
-                'ip': client.getsockname()
-            }
+            header = {}
             msg = 'hello,'
 
             print('send: ' + msg)

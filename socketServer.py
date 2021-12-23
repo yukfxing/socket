@@ -3,7 +3,7 @@
 import socket
 import time
 import threading
-from utils import recvMsg, sendMsg, timestamp2Date
+from utils import recvMessage, sendMessage, timestamp2Date
 
 
 def init():
@@ -39,18 +39,19 @@ def dealMsg(con, addr):
     print(addr[0] + ':' + str(addr[1]) + ' connect.')
 
     while True:
-        header, recvData = recvMsg(con)
-        if not recvData:
+        header, body = recvMessage(con)
+        if not body:
             con.close()
             print(addr[0] + ':' + str(addr[1]) + ' disconnect.')
             break
 
-        print(str(addr[1]) + ': ' + recvData['msg'] + '  ' + timestamp2Date(header['timestamp']))
+        print(str(addr[1]) + ': ' + body['msg'] + '  ' + timestamp2Date(header['timestamp']))
 
-        res = dealDetailMsg(header, recvData)
+        # TODO: deal message and return result
+        res = dealDetailMsg(header, body)
 
         header = {}
-        sendMsg(con, header, res)
+        sendMessage(con, header, res)
         print (str(server.getsockname()[1]) + ': ' + res['msg'] + '  ' + time.strftime("%Y-%m-%d %H:%M:%S"))
 
 

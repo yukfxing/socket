@@ -77,8 +77,12 @@ def recvMessage(con):
 
 
 def sendMessage(con, header, content):
+    header.update({
+        'timestamp': int(time.time())
+    })
     msg = packPackage(header, content)
     con.send(msg)
+
 
 
 def packMsg(header, content):
@@ -138,9 +142,6 @@ def recvMsg(con):
 def sendMsg(con, header, content):
     msg = packMsg(header, content)
     con.send(msg)
-
-
-
 
 
 
